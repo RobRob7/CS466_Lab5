@@ -1,0 +1,8 @@
+no reg, no MAX, no symtable stuff 
+REMOVE IT ALL!!!
+
+Fun_Declaration_Proto IMPLEMENT FOR GRAD STUDENTS
+
+Only accept '//' comments!!
+
+When done, you should get ONLY 1 shift/reduce error!
