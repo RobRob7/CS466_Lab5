@@ -40,7 +40,6 @@ write     { return(T_WRITE); }
 \".*\"    { return(T_STRING); }
 
 
-
 [a-zA-Z][a-zA-Z0-9_]*		{ if (mydebug){
                             fprintf(stderr,"Letter found\n");
                           }
@@ -65,7 +64,7 @@ write     { return(T_WRITE); }
           }
         }
 
-[=\-+*/%&|();,{}] 	{ if (mydebug){
+[=\-+*/%&|();,{}[]] 	{ if (mydebug){
                     fprintf(stderr,"return a token %c\n",*yytext); /* incorporated '(' and ')' into possible characters to return as token */
                   }
                   return (*yytext);

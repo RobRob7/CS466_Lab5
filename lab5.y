@@ -26,7 +26,6 @@ void yyerror (s)  /* Called by yyparse on error */
 }
 
 %}
-/*  defines the start symbol, what values come back from LEX and how the operators are associated  */
 
 // allows LEX to return int or char*
 %union {
@@ -34,6 +33,7 @@ void yyerror (s)  /* Called by yyparse on error */
 	char* string;
 }
 
+// start symbol
 %start Program
 
 // define each multi-varied token
@@ -58,6 +58,8 @@ void yyerror (s)  /* Called by yyparse on error */
 %token T_MULT
 %token T_DIV
 %token T_STRING
+/* %token T_LEFTBRACKET
+%token T_RIGHTBRACKET */
 
 %%	/* end specs, begin rules */
 
@@ -93,15 +95,14 @@ Params : T_VOID
 	   ;
 
 Param_List : Param 
-		   | Param ',' Param
+		   | Param ',' Param_List
 		   ;
 
 Param : Type_Specifier T_ID
 	  | Type_Specifier T_ID '[' ']'
 	  ;
 
-Compound_Stmt : /* empty */
-			  | Local_Declarations Statement_List Compound_Stmt
+Compound_Stmt : '{' Local_Declarations Statement_List '}'
 			  ;
 			
 Local_Declarations : /* empty */
