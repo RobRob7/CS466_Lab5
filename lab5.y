@@ -145,7 +145,7 @@ Write_Stmt : T_WRITE Expression ';'
 		   | T_WRITE T_STRING ';'
 		   ;
 
-Assignment_Stmt : Var '=' Simple_Expression
+Assignment_Stmt : Var '=' Simple_Expression ';'
 				;
 
 Var : T_ID

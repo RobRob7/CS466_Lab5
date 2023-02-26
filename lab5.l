@@ -64,7 +64,7 @@ write     { return(T_WRITE); }
           }
         }
 
-[=\-+*/%&|();,{}[]] 	{ if (mydebug){
+[=\-+*/%&|();,{}\[\]] 	{ if (mydebug){
                     fprintf(stderr,"return a token %c\n",*yytext); /* incorporated '(' and ')' into possible characters to return as token */
                   }
                   return (*yytext);
