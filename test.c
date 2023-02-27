@@ -1,8 +1,14 @@
 // Shaun Cooper
 // Test one
 
+void f(void);
+// int hello(int x);
+
 int x;
 int x,x;
+
+// void f(void);
+// int hello(int x);
 
 int main(int a, void b, int a[]) { 
  int x , A[100];

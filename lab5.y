@@ -58,6 +58,7 @@ void yyerror (s)  /* Called by yyparse on error */
 %token T_MULT
 %token T_DIV
 %token T_STRING
+%token T_BRACKETS
 /* %token T_LEFTBRACKET
 %token T_RIGHTBRACKET */
 
@@ -77,17 +78,18 @@ Declaration : Var_Declaration
 Var_Declaration : Type_Specifier Var_List ';'
 				;
 
-Var_List : T_ID	{ printf("Var_List ID is %s\n", $1); }
-		 | T_ID '[' T_NUM ']' { printf("Var_List ID is %s\n", $1); }
-		 | T_ID ',' Var_List { printf("Var_List ID is %s\n", $1); }
-		 | T_ID '[' T_NUM ']' ',' Var_List { printf("Var_List ID is %s\n", $1); }
+Var_List : T_ID	{ printf("Var_List with value %s\n", $1); }
+		 | T_ID '[' T_NUM ']' { printf("Var_List with value %s\n", $1); }
+		 | T_ID ',' Var_List { printf("Var_List with value %s\n", $1); }
+		 | T_ID '[' T_NUM ']' ',' Var_List { printf("Var_List with value %s\n", $1); }
 		 ;
 
 Type_Specifier : T_INT
 			   | T_VOID
 			   ;
 
-Fun_Declaration : Type_Specifier T_ID '(' Params ')' Compound_Stmt
+Fun_Declaration : Type_Specifier T_ID '(' Params ')' Compound_Stmt { printf("FunDec with value %s\n", $2); }
+				| Type_Specifier T_ID '(' Params ')' ';' { printf("FunPro with value %s", $2); }
 				;
 
 Params : T_VOID
@@ -98,8 +100,8 @@ Param_List : Param
 		   | Param ',' Param_List
 		   ;
 
-Param : Type_Specifier T_ID
-	  | Type_Specifier T_ID '[' ']'
+Param : Type_Specifier T_ID { printf("PARAM with value %s\n", $2); }
+	  | Type_Specifier T_ID T_BRACKETS { printf("PARAM with value %s\n", $2); }
 	  ;
 
 Compound_Stmt : '{' Local_Declarations Statement_List '}'
@@ -134,8 +136,8 @@ Selection_Stmt : T_IF '(' Expression ')' Statement
 Iteration_Stmt : T_WHILE '(' Expression ')' Statement
 			   ;
 
-Return_Stmt : T_RETURN
-			| T_RETURN Expression
+Return_Stmt : T_RETURN ';'
+			| T_RETURN Expression ';'
 			;
 
 Read_Stmt : T_READ Var ';'
@@ -148,8 +150,8 @@ Write_Stmt : T_WRITE Expression ';'
 Assignment_Stmt : Var '=' Simple_Expression ';'
 				;
 
-Var : T_ID
-	| T_ID '[' Expression ']'
+Var : T_ID { printf("Var with value %s\n", $1); }
+	| T_ID '[' Expression ']' { printf("Var with value %s\n", $1); }
 	;
 
 Expression : Simple_Expression
@@ -190,7 +192,7 @@ Factor : '(' Expression ')'
 	   | '-'Factor
 	   ;
 
-Call : T_ID '(' Args ')'
+Call : T_ID '(' Args ')' { printf("CALL with value %s\n", $1); }
 	 ;
 
 Args : Arg_List

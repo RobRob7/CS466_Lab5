@@ -38,6 +38,7 @@ write     { return(T_WRITE); }
 "*"       { return(T_MULT); }
 "/"       { return(T_DIV); }
 \".*\"    { return(T_STRING); }
+"[]"      { return(T_BRACKETS); }
 
 
 [a-zA-Z][a-zA-Z0-9_]*		{ if (mydebug){
