@@ -5,7 +5,13 @@
 		   Implementing CMINUS+ EBNF and translating it into YACC and LEX directives
 
 		   Changes Made:
-           > 
+           > removed all occurrences of previous labs that are not important (symbol table, reg, MAX, calculator functionality)
+		   > define all tokens with specified names being returned from lab5.l
+		   > implement extended BNF grammar for CMINUS
+		   > define external int variables "mydebug", "lineno" from lab5.l
+		   > all Non Terminals are Camel Case
+		   > everywhere there is T_ID, the name of the variable is printed out
+		   > GRAD PORTION: implemented grammar for function prototype
   */
 
 
@@ -59,8 +65,6 @@ void yyerror (s)  /* Called by yyparse on error */
 %token T_DIV
 %token T_STRING
 %token T_BRACKETS
-/* %token T_LEFTBRACKET
-%token T_RIGHTBRACKET */
 
 %%	/* end specs, begin rules */
 

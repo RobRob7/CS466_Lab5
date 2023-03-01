@@ -5,7 +5,10 @@
            Implementing CMINUS+ EBNF and translating it into YACC and LEX directives
 
            Changes Made:
-           > 
+           > removed all occurrences of previous labs that are not important (symbol table, reg, MAX)
+           > define character strings as returnable tokens (lines 25 - 44) with specified token names
+           > included braces '{', '}' and brackets '[', ']' as returnable tokens
+           > lex now ignores comments that start with //
   */
 
 // debug variable (0 for no debug statements, 1 for them to display)

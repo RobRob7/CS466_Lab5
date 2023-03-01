@@ -1,5 +1,5 @@
 ### Lab 5 CS466
-### CMINUS+
+### CMINUS+ into YACC and LEX
 ##	March 1, 2023
 ##	Robert J. Armendariz
 
