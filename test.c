@@ -1,7 +1,7 @@
 // Shaun Cooper
 // Test one
 
-void f(void);
+void functionProto(void);
 // int hello(int x);
 
 int x;

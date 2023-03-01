@@ -2,7 +2,14 @@
   /*       Robert J. Armendariz
            Lab 5 -- Cminus into LEX and YACC
            March 1, 2023
-		   Implementing CMINUS+ EBNF and translating it into YACC and LEX directives
+		   CMINUS Extended BNF YACC Implementation
+
+		   
+		   This YACC program utilizes the tokens returned from LEX and implements the 
+		   extended BNF grammar for C Minus (check for proper syntax) from the PDF supplied
+		   by Dr. Cooper. There is an additional syntax check for function prototypes.
+		   Left recursion is made on the recursive definitions except for expressions.
+		   Prints out 'T_ID' anywhere we see 'T_ID'
 
 		   Changes Made:
            > removed all occurrences of previous labs that are not important (symbol table, reg, MAX, calculator functionality)
@@ -12,6 +19,8 @@
 		   > all Non Terminals are Camel Case
 		   > everywhere there is T_ID, the name of the variable is printed out
 		   > GRAD PORTION: implemented grammar for function prototype
+
+      SOURCE FROM SHAUN COOPER
   */
 
 
@@ -77,15 +86,16 @@ Declaration_List : Declaration
 
 Declaration : Var_Declaration
 			| Fun_Declaration
+			| Fun_Declaration_Proto
 			;
 
 Var_Declaration : Type_Specifier Var_List ';'
 				;
 
-Var_List : T_ID	{ printf("Var_List with value %s\n", $1); }
-		 | T_ID '[' T_NUM ']' { printf("Var_List with value %s\n", $1); }
-		 | T_ID ',' Var_List { printf("Var_List with value %s\n", $1); }
-		 | T_ID '[' T_NUM ']' ',' Var_List { printf("Var_List with value %s\n", $1); }
+Var_List : T_ID	{ printf("Var_LIST with value %s\n", $1); }
+		 | T_ID '[' T_NUM ']' { printf("Var_LIST with value %s\n", $1); }
+		 | T_ID ',' Var_List { printf("Var_LIST with value %s\n", $1); }
+		 | T_ID '[' T_NUM ']' ',' Var_List { printf("Var_LIST with value %s\n", $1); }
 		 ;
 
 Type_Specifier : T_INT
@@ -93,8 +103,10 @@ Type_Specifier : T_INT
 			   ;
 
 Fun_Declaration : Type_Specifier T_ID '(' Params ')' Compound_Stmt { printf("FunDec with value %s\n", $2); }
-				| Type_Specifier T_ID '(' Params ')' ';' { printf("FunPro with value %s", $2); }
 				;
+
+Fun_Declaration_Proto : Type_Specifier T_ID '(' Params ')' ';' { printf("FunPro with value %s", $2); }
+					  ;
 
 Params : T_VOID
 	   | Param_List

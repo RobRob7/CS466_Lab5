@@ -2,13 +2,20 @@
   /*       Robert J. Armendariz
            Lab 5 -- Cminus into LEX and YACC
            March 1, 2023
-           Implementing CMINUS+ EBNF and translating it into YACC and LEX directives
+           LEX file 'lab5.l' that supports CMINUS tokens
+
+           This LEX program looks for unique character strings such as "int" or single characters
+           such as '{' and returns them to YACC as tokens (T_ or single character) to satisfy the implementation of
+           CMINUS+ EBNF and translating it into YACC. Character strings are mapped to tokens first. Also keeps track
+           of line count.
 
            Changes Made:
            > removed all occurrences of previous labs that are not important (symbol table, reg, MAX)
-           > define character strings as returnable tokens (lines 25 - 44) with specified token names
+           > define character strings as returnable tokens (lines 32 - 51) with specified token names
            > included braces '{', '}' and brackets '[', ']' as returnable tokens
            > lex now ignores comments that start with //
+
+      SOURCE FROM SHAUN COOPER
   */
 
 // debug variable (0 for no debug statements, 1 for them to display)
@@ -69,8 +76,9 @@ write     { return(T_WRITE); }
         }
 
 [=\-+*/%&|();,{}\[\]] 	{ if (mydebug){
-                    fprintf(stderr,"return a token %c\n",*yytext); /* incorporated '(' and ')' into possible characters to return as token */
+                    fprintf(stderr,"return a token %c\n",*yytext); /* incorporated '(', ')', '{', '}', '[', ']' into possible characters to return as token */
                   }
+                  // return these characters for YACC
                   return (*yytext);
                 }
 
@@ -81,7 +89,7 @@ write     { return(T_WRITE); }
         lineno++;
       }
 
-"//".*  { /* consumed by LEX */}
+"//".*  { /* consumed by LEX (comments) */}
 
 %% /* end of rules section, begin subroutines section */
 
