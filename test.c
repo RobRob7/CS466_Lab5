@@ -2,6 +2,7 @@
 // Test one
 
 void functionProto(void);
+void fun(int funvar);
 // int hello(int x);
 
 int x;
