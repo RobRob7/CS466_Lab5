@@ -105,7 +105,7 @@ Type_Specifier : T_INT
 Fun_Declaration : Type_Specifier T_ID '(' Params ')' Compound_Stmt { printf("FunDec with value %s\n", $2); }
 				;
 
-Fun_Declaration_Proto : Type_Specifier T_ID '(' Params ')' ';' { printf("FunPro with value %s", $2); }
+Fun_Declaration_Proto : Type_Specifier T_ID '(' Params ')' ';' { printf("FunPro with value %s\n", $2); }
 					  ;
 
 Params : T_VOID
