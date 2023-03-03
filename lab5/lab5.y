@@ -184,7 +184,7 @@ Relop : T_LE
 	  ;
 
 Additive_Expression : Term
-					| Term Addop Additive_Expression
+					| Additive_Expression Addop Term
 					;
 
 Addop : T_ADD
@@ -192,7 +192,7 @@ Addop : T_ADD
 	  ;
 
 Term : Factor
-	 | Factor Multop Term
+	 | Term Multop Factor
 	 ;
 
 Multop : T_MULT
